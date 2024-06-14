@@ -25,3 +25,15 @@ So lets get started with the basic steps
 As shown in the picture above to enable SSH for your Synology NAS go to Control Panel -> Terminal & SNMP -> Terminal Tab -> Check Enable SSH Service and enter a port.
 
 - It is highly recommended to use a custom port and not standard 22 as you then will get a lot of brute force attempts from robots and attackers scanning public IPs against port 22, this is if you are exposing your Synology NAS to the internet.
+
+## 2. Prerequisite - Creation of SSH key pair
+To use SSH key authentication we will need to generate a SSH key pair (one privateKey, one publicKey). The publicKey will be shared with and stored in the Synology NAS SSH "authorized keys" while the privateKey will be used to prove our identity as it will correspond to the publicKey.
+
+- Windows
+   - If you are on Windows I recommend downloading puttygen to generate the keys, its very quick and user friendly, see the link below for a guide on creation of RSA key.
+https://www.ssh.com/ssh/putty/windows/puttygen
+
+- Mac
+   - Open a terminal, navigate to a folder and run below to generate a public and private key
+      - `ssh-keygen -t rsa -b 4096 -C "user@domain.com"`
+   - Go here if you want to read up some more: https://www.ssh.com/ssh/keygen/
