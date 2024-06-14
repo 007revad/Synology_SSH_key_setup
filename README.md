@@ -37,3 +37,20 @@ https://www.ssh.com/ssh/putty/windows/puttygen
    - Open a terminal, navigate to a folder and run below to generate a public and private key
       - `ssh-keygen -t rsa -b 4096 -C "user@domain.com"`
    - Go here if you want to read up some more: https://www.ssh.com/ssh/keygen/
+
+## 3. Prerequisite - Copy the publicKey
+Open the created keyname.pub and copy the content to a text editor or similar. The public key should start on ssh-rsa and a lot of look like below, beware there is no new line here, it is all in one line (this is also important for later).
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/wYwtsJ8iCszg4/lXQsfLFxYmEVe8L9atgtMGCi5QdYPl4X/c+5YxFfm88Yjfx+2xEgUdOr864eaI22yaNMQ0AlyilmK+PcSyxKP4dzkf6B5Nsw8lhfB5n9F5md6GHLLjOGuBbHYlesKJKnt2cMzzS90BdRk73qW6wJ+MCUWo+cyBFZVGOzrjJGEcHewOCbVs+IJWBFSi6w1enbKGc+RY9KrnzeDKWWqzYnNofiHGVFAuMxrmZOasqlTIKiC2UK3RmLxZicWiQmPnpnjJRo7pL0oYM9r/sIWzD6i2S9szDy6aZ user@domain.com
+```
+
+## 4. SSH into your NAS
+Now that we have a key pair, we have enabled SSH on the Synology NAS lets log in to configure the SSH authorized_keys (= our generated public key)
+
+Open a terminal and ssh into the server as below
+`ssh {admin-user}@{nas-ip-or-host} -p {specifiedCustomPort}`
+
+Now run pwd command to verify your are in the {admin-user} user directory
+
+command = pwd
+result = /volume1/homes/{admin-user}
