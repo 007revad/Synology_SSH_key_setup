@@ -19,3 +19,9 @@ Now through this whole guide you will be in the **context of a specific user** w
 
 <p align="center"><img src="/images/image-1.png"></p>
 
+So lets get started with the basic steps
+
+## 1. Prerequisite - Enable SSH on your Synology NAS
+As shown in the picture above to enable SSH for your Synology NAS go to Control Panel -> Terminal & SNMP -> Terminal Tab -> Check Enable SSH Service and enter a port.
+
+- It is highly recommended to use a custom port and not standard 22 as you then will get a lot of brute force attempts from robots and attackers scanning public IPs against port 22, this is if you are exposing your Synology NAS to the internet.
