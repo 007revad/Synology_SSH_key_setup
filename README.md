@@ -49,7 +49,38 @@ Now that we have a key pair, we have enabled SSH on the Synology NAS lets log in
 
 Open a terminal and ssh into the server with your admin-user, ip and custom port: 
 
-`ssh {admin-user}@{nas-ip-or-host} -p {specifiedCustomPort}`
+```
+ssh {admin-user}@{nas-ip-or-host} -p {specifiedCustomPort}
+```
 
 Now run `pwd` command to verify your are in the {admin-user} user directory. The result should be:
-- `/volume1/homes/{admin-user}`
+- ***/volume1/homes/{admin-user}***
+
+## 5. Creation of .ssh directory and authorized_keys file
+Now in the {admin-user} directory create a directory named **.ssh**
+
+```
+mkdir .ssh
+```
+
+Now navigate to the .ssh folder
+
+```
+cd .ssh
+```
+
+or
+
+```
+cd ~/.ssh
+```
+
+Now run the `pwd` command to verify you are in the right location) lets create a authorized_keys file.
+  - The result should be ***/volume1/homes/{admin-user}/.ssh***
+
+Next create a authorized_keys file.
+
+```
+vi authorized_keys
+```
+
