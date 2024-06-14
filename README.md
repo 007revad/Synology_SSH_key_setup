@@ -3,7 +3,7 @@ How to setup SSH key authentication for your Synology
 
 Content from Gudbrand Olimb's now deleted https://blog.golimb.com/2020/10/03/synology-ssh-key-authentication/
 
-<p align="center"><img src="/images/icon.jpg"></p>
+<p align="left"><img src="/images/icon.jpg" width="467" height="200"></p>
 
 There is a lot of posts throughout the web on configuring SSH key authentication on Synology NAS many with some confusing and unnecessary steps such as:
 - Modifying the RSAAuthentication and PubkeyAuthentication parameters in /etc/ssh/sshd_config
