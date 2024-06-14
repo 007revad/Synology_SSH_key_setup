@@ -117,3 +117,27 @@ What we need to do is to change the permissions to below:
 
 <p align="center"><img src="/images/image-3.png"></p>
 
+This can be done by running:
+```
+sudo chmod 755 /volume1/homes/{admin-user}
+```
+There are some comments that changing the user home permissions might not be the best solution to resolve this due to security or the fact that a Synology update might change this later.
+- The first case on security should not be a worry in itself as we are actually reducing security permissions by changing from 777 to 755 permissions
+- The second case of Synology updates is something to be aware of and that you might need to set this permission again in future after an update if that update resets the permissions to 777
+  - Based on the fact that there is a risk of permissions being reset outside of our control I would discourage the removal of username/pw authentication possibility in sshd_config (/etc/ssh/sshd_config) which some has suggested to do when correctly having SSH key authentication working.
+ 
+Now if you want to be 100% sure you have the correct permissions for the user home and the .ssh directory and authorized_keys you can either
+- Run these below chmod commands to set the correct permissions:
+```
+sudo chmod 755 /volume1/homes/{admin-user}
+sudo chmod 755 /volume1/homes/{admin-user}/.ssh
+sudo chmod 644 /volume1/homes/{admin-user}/.ssh/authorized_keys
+```
+
+Or (if you want to use the alias, remember to be in the {admin-user} context:
+```
+sudo chmod 755 .
+sudo chmod 755 ~/.ssh
+sudo chmod 644 ~/.ssh/authorized_keys
+```
+
