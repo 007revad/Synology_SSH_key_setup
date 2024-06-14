@@ -69,12 +69,6 @@ Now navigate to the .ssh folder
 cd .ssh
 ```
 
-or
-
-```
-cd ~/.ssh
-```
-
 Now run the `pwd` command to verify you are in the right location) lets create a authorized_keys file.
   - The result should be ***/volume1/homes/{admin-user}/.ssh***
 
@@ -132,12 +126,5 @@ Now if you want to be 100% sure you have the correct permissions for the user ho
 sudo chmod 755 /volume1/homes/{admin-user}
 sudo chmod 755 /volume1/homes/{admin-user}/.ssh
 sudo chmod 644 /volume1/homes/{admin-user}/.ssh/authorized_keys
-```
-
-Or (if you want to use the alias, remember to be in the {admin-user} context:
-```
-sudo chmod 755 .
-sudo chmod 755 ~/.ssh
-sudo chmod 644 ~/.ssh/authorized_keys
 ```
 
