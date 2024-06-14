@@ -105,11 +105,11 @@ Now often at this point this is where a lot of confusion occurs when trying to d
 - Users home folder = /volume1/homes/{username}
 - In this case home folder = /volume1/homes/{admin-user}
 
-<p align="center"><img src="/images/image-2.png"></p>
+<p align="center"><img src="/images/image-2.png" width="500" height="266"></p>
 
 What we need to do is to change the permissions to below:
 
-<p align="center"><img src="/images/image-3.png"></p>
+<p align="center"><img src="/images/image-3.png" width="500" height="266"></p>
 
 This can be done by running:
 ```
