@@ -53,8 +53,8 @@ Open a terminal and ssh into the server with your admin-user, ip and custom port
 ssh {admin-user}@{nas-ip-or-host} -p {specifiedCustomPort}
 ```
 
-Now run `pwd` command to verify your are in the {admin-user} user directory. The result should be:
-- ***/volume1/homes/{admin-user}***
+Now run `pwd` command to verify your are in the {admin-user} user directory. 
+- The result should be: ***/volume1/homes/{admin-user}***
 
 ## 5. Creation of .ssh directory and authorized_keys file
 Now in the {admin-user} directory create a directory named **.ssh**
@@ -84,3 +84,22 @@ Next create a authorized_keys file.
 vi authorized_keys
 ```
 
+This will take you into the vi program interface for adding content.
+
+- Press i - this will allow you to insert text.
+- Paste the public key from step 3.
+   - Ensure you paste the public key on one line only, no new line and remember the spaces.
+- Press esc - to enter vi program interface.
+- Press semicolon **:** key.
+- Type **wq!** and press enter to save the file.
+
+Now lets verify the file is created with the `ls` command.
+  - The result should be ***authorized_keys**
+
+Now lets verify the public key in the file with the command `more authorized_keys`
+
+The result should look like:
+
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/wYwtsJ8iCszg4/lXQsfLFxYmEVe8L9atgtMGCi5QdYPl4X/c+5YxFfm88Yjfx+2xEgUdOr864eaI22yaNMQ0AlyilmK+PcSyxKP4dzkf6B5Nsw8lhfB5n9F5md6GHLLjOGuBbHYlesKJKnt2cMzzS90BdRk73qW6wJ+MCUWo+cyBFZVGOzrjJGEcHewOCbVs+IJWBFSi6w1enbKGc+RY9KrnzeDKWWqzYnNofiHGVFAuMxrmZOasqlTIKiC2UK3RmLxZicWiQmPnpnjJRo7pL0oYM9r/sIWzD6i2S9szDy6aZ user@domain.com
+```
