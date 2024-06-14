@@ -47,10 +47,9 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/w
 ## 4. SSH into your NAS
 Now that we have a key pair, we have enabled SSH on the Synology NAS lets log in to configure the SSH authorized_keys (= our generated public key)
 
-Open a terminal and ssh into the server as below
+Open a terminal and ssh into the server with your admin-user, ip and custom port: 
+
 `ssh {admin-user}@{nas-ip-or-host} -p {specifiedCustomPort}`
 
-Now run pwd command to verify your are in the {admin-user} user directory
-
-command = pwd
-result = /volume1/homes/{admin-user}
+Now run `pwd` command to verify your are in the {admin-user} user directory. The result should be:
+- `/volume1/homes/{admin-user}`
