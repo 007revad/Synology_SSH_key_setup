@@ -86,10 +86,10 @@ vi authorized_keys
 
 This will take you into the vi program interface for adding content.
 
-- Press i - this will allow you to insert text.
-- Paste the public key from step 3.
-   - Ensure you paste the public key on one line only, no new line and remember the spaces.
-- Press esc - to enter vi program interface.
+- Press **i** to enable inserting text.
+- Paste your public key from step 3.
+   - Ensure you paste your public key on one line only, no new line and remember the spaces.
+- Press **esc** to enter the vi program interface.
 - Press semicolon **:** key.
 - Type **wq!** and press enter to save the file.
 
@@ -103,3 +103,17 @@ The result should look like:
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/wYwtsJ8iCszg4/lXQsfLFxYmEVe8L9atgtMGCi5QdYPl4X/c+5YxFfm88Yjfx+2xEgUdOr864eaI22yaNMQ0AlyilmK+PcSyxKP4dzkf6B5Nsw8lhfB5n9F5md6GHLLjOGuBbHYlesKJKnt2cMzzS90BdRk73qW6wJ+MCUWo+cyBFZVGOzrjJGEcHewOCbVs+IJWBFSi6w1enbKGc+RY9KrnzeDKWWqzYnNofiHGVFAuMxrmZOasqlTIKiC2UK3RmLxZicWiQmPnpnjJRo7pL0oYM9r/sIWzD6i2S9szDy6aZ user@domain.com
 ```
+
+## 6. Often confused step - setting correct permissions
+Now often at this point this is where a lot of confusion occurs when trying to do SSH authentication with Synology NAS. A lot of this confusion occurs because the {admin-user} home directory by default allows any access which the sshd SSH daemon considers insecure and then prevents SSH key authentication from occurring.
+
+**Default permissions of users home folders is 777 / rwxrwxrwx**
+- Users home folder = /volume1/homes/{username}
+- In this case home folder = /volume1/homes/{admin-user}
+
+<p align="center"><img src="/images/image-2.png"></p>
+
+What we need to do is to change the permissions to below:
+
+<p align="center"><img src="/images/image-3.png"></p>
+
