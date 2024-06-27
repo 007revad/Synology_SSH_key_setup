@@ -133,10 +133,149 @@ There are some comments that changing the user home permissions might not be the
   - Based on the fact that there is a risk of permissions being reset outside of our control I would discourage the removal of username/pw authentication possibility in sshd_config (/etc/ssh/sshd_config) which some has suggested to do when correctly having SSH key authentication working.
  
 Now if you want to be 100% sure you have the correct permissions for the user home and the .ssh directory and authorized_keys you can either
-- Run these below chmod commands to set the correct permissions:
+- Run the following chmod commands to set the correct permissions:
 ```
 sudo chmod 755 /volume1/homes/{admin-user}
 sudo chmod 755 /volume1/homes/{admin-user}/.ssh
 sudo chmod 644 /volume1/homes/{admin-user}/.ssh/authorized_keys
 ```
+- Or check the permissions of each of the below folders and files one by one
+    - Chmod calculator - https://chmod-calculator.com/
 
+Check the permissions of the following Folders and files:
+```
+/volume1/homes/{admin-user} | 755
+/volume1/homes/{admin-user}/.ssh | 755
+/volume1/homes/{admin-user}/.ssh/authorized_keys | 644
+```
+
+To check navigate to /volume1/homes/{admin-user}/.ssh and run ls -al
+```
+cd /volume1/homes/{admin-user}/.ssh
+ls -al
+
+drwxr-xr-x  2 {admin-user} users 4096 Oct  3 15:58 .
+drwxr-xr-x 16 {admin-user} users 4096 Oct  3 16:08 ..
+-rw-r--r--  1 {admin-user} users  747 Oct  3 16:11 authorized_keys
+```
+
+. represents /volume1/homes/{admin-user}/.ssh folder <br>.. represents /volume1/homes/{admin-user} folder <br>authorized_keys represents /volume1/homes/{admin-user}/.ssh/authorized_keys file
+
+## 7. Ready to test
+
+Now we should be ready to go to connect to the Synology NAS with SSH key authentication. On your PC/Mac whatever go to the folder holding your private key, to test the connection perform the following command from terminal.
+```
+ssh {admin-user}@{nas-ip-or-host} -p {specifiedCustomPort} -o "IdentitiesOnly=yes" -i {privateKey}
+```
+
+Now hopefully you are automatically logged in to the Synology NAS over SSH as the key pair exchange and authentication happens in the backend.
+
+Now if you want to simply your login so you can do as below for example:
+```
+ssh synologyNas
+```
+
+Then checkout the following link for setting up a SSH config file with and alias (synologyNas) with preconfigured parameters for ip/host, port, privatekey, user, etc
+- https://mediatemple.net/community/products/grid/204644730/using-an-ssh-config-file
+
+## 8. Troubleshooting
+
+Log back into the Synology NAS using username/pw as {admin-user} through terminal and run command below, this will start a debug ssh server where you can see the interaction between Synology NAS and your PC/Mac
+```
+sudo /bin/sshd -p {debugPort} -d
+```
+
+Now from your PC/Mac open another terminal and perform the same key authentication command as before against the debug ssh server
+```
+ssh {admin-user}@{nas-ip-or-host} -p {debugPort} -o "IdentitiesOnly=yes" -i {privateKey}
+```
+
+Now in the session from step 1 you should be able to see the debug console any any issues such as permission issues etc.
+
+### Common errors
+
+**Wrong permissions on user home folder**
+
+Error message:
+```
+debug1: temporarily_use_uid: 1026/100 (e=0/0)
+debug1: trying public key file /var/services/homes/{admin-user}/.ssh/authorized_keys
+debug1: fd 4 clearing O_NONBLOCK
+Authentication refused: bad ownership or modes for directory /volume1/homes/{admin-user}
+debug1: restore_uid: 0/0
+```
+
+Resolution: Go back to step 6 and ensure you set the correct permissions on the users home directory
+
+<br>
+
+**Wrong permissions on .ssh folder**
+
+Error message:
+```
+debug1: temporarily_use_uid: 1026/100 (e=0/0)
+debug1: trying public key file /var/services/homes/{admin-user}/.ssh/authorized_keys
+debug1: fd 4 clearing O_NONBLOCK
+Authentication refused: bad ownership or modes for directory /volume1/homes/{admin-user}/.ssh
+debug1: restore_uid: 0/0
+```
+
+Resolution: Go back to step 6 and ensure you set the correct permissions on the .ssh directory
+
+<br>
+
+**Wrong permissions on authorized_keys file**
+
+Error message:
+```
+debug1: trying public key file /var/services/homes/{admin-user}/.ssh/authorized_keys
+debug1: Could not open authorized keys '/var/services/homes/{admin-user}/.ssh/authorized_keys': Permission denied
+debug1: restore_uid: 0/0
+```
+Resolution: Go back to step 6 and ensure you set the correct permissions on the authorized_keys file in the .ssh directory
+
+<br>
+
+**Wrongly created .ssh folder (usually under wrong user context like e.g. root and not user)**
+
+Error message:
+```
+debug1: temporarily_use_uid: 1026/100 (e=0/0)
+debug1: trying public key file /var/services/homes/{admin-user}/.ssh/authorized_keys
+debug1: Could not open authorized keys '/var/services/homes/{admin-user}/.ssh/authorized_keys': No such file or directory
+debug1: restore_uid: 0/0
+```
+
+Resolution: Go back to step 5 and ensure you create the .ssh directory and authorized_keys under the correct context/user {admin-user}
+
+This error can typically happen if you ended up creating the .ssh folder under root as below:
+```
+command as root - ash# pwd
+result - /root/.ssh
+```
+
+What it should be:
+```
+command as {admin-user} - {admin-user}# pwd
+result - /volume1/homes/{admin-user}/.ssh
+```
+
+### A few extra handy tips
+
+If you think/feel that the SSH daemon on the Synology NAS is not taking into effect your changes you can try to restart the daemon by running below command (requires admin access)
+```
+sudo synoservicectl --reload sshd
+```
+
+On Mac to set correct permissions on .ssh folder and privateKeys used for SSH key authentication if you get error as below
+```
+Permissions 0777 for '/Users/username/.ssh/privateKeys/id_rsa' are too open.
+It is recommended that your private key files are NOT accessible by others.
+This private key will be ignored.
+```
+
+To correct the permissions to be valid run below
+```
+sudo chmod -R 755 ~/.ssh
+sudo chmod -R 600 ~/.ssh/privateKeys/*
+```
