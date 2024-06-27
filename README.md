@@ -133,7 +133,7 @@ There are some comments that changing the user home permissions might not be the
   - Based on the fact that there is a risk of permissions being reset outside of our control I would discourage the removal of username/pw authentication possibility in sshd_config (/etc/ssh/sshd_config) which some has suggested to do when correctly having SSH key authentication working.
  
 Now if you want to be 100% sure you have the correct permissions for the user home and the .ssh directory and authorized_keys you can either
-- Run these below chmod commands to set the correct permissions:
+- Run the following chmod commands to set the correct permissions:
 ```
 sudo chmod 755 /volume1/homes/{admin-user}
 sudo chmod 755 /volume1/homes/{admin-user}/.ssh
