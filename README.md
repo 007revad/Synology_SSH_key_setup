@@ -139,4 +139,24 @@ sudo chmod 755 /volume1/homes/{admin-user}
 sudo chmod 755 /volume1/homes/{admin-user}/.ssh
 sudo chmod 644 /volume1/homes/{admin-user}/.ssh/authorized_keys
 ```
+- Or check the permissions of each of the below folders and files one by one
+    - Chmod calculator - https://chmod-calculator.com/
 
+Check the permissions of the following Folders and files:
+```
+/volume1/homes/{admin-user} | 755
+/volume1/homes/{admin-user}/.ssh | 755
+/volume1/homes/{admin-user}/.ssh/authorized_keys | 644
+```
+
+To check navigate to /volume1/homes/{admin-user}/.ssh and run ls -al
+```
+cd /volume1/homes/{admin-user}/.ssh
+ls -al
+
+drwxr-xr-x  2 {admin-user} users 4096 Oct  3 15:58 .
+drwxr-xr-x 16 {admin-user} users 4096 Oct  3 16:08 ..
+-rw-r--r--  1 {admin-user} users  747 Oct  3 16:11 authorized_keys
+```
+
+. represents /volume1/homes/{admin-user}/.ssh folder <br>.. represents /volume1/homes/{admin-user} folder <br>authorized_keys represents /volume1/homes/{admin-user}/.ssh/authorized_keys file
