@@ -51,7 +51,7 @@ https://www.ssh.com/ssh/putty/windows/puttygen
    - Go here if you want to read up some more: https://www.ssh.com/ssh/keygen/
 
 ## 3. Prerequisite - Copy the publicKey
-Open the created keyname.pub and copy the content to a text editor or similar. The public key should start on ssh-rsa and a lot of look like below, beware there is no new line here, it is all in one line (this is also important for later).
+Open the created keyname.pub and copy the content to a text editor or similar. The public key should start on ssh-rsa and look a lot like below, beware there is no new line here, it is all in one line (this is also important for later).
 ```
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSkT3A1j89RT/540ghIMHXIVwNlAEM3WtmqVG7YN/wYwtsJ8iCszg4/lXQsfLFxYmEVe8L9atgtMGCi5QdYPl4X/c+5YxFfm88Yjfx+2xEgUdOr864eaI22yaNMQ0AlyilmK+PcSyxKP4dzkf6B5Nsw8lhfB5n9F5md6GHLLjOGuBbHYlesKJKnt2cMzzS90BdRk73qW6wJ+MCUWo+cyBFZVGOzrjJGEcHewOCbVs+IJWBFSi6w1enbKGc+RY9KrnzeDKWWqzYnNofiHGVFAuMxrmZOasqlTIKiC2UK3RmLxZicWiQmPnpnjJRo7pL0oYM9r/sIWzD6i2S9szDy6aZ user@domain.com
 ```
