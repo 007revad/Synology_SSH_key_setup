@@ -13,7 +13,7 @@
 
 How to setup SSH key authentication for your Synology
 
-Tommes has an excellent guide [in English here](https://github.com/toafez/Tutorials/blob/main/SynologyNAS/ssh_from_operating_system_to_nas_en.md), and [in German here](https://github.com/toafez/Tutorials/blob/main/SynologyNAS/ssh_from_operating_system_to_nas.md) that goes with their [YouTube video in German here](https://youtu.be/VjoWjX_8E3Q).
+Tommes has an excellent guide [in English here](https://github.com/toafez/Tutorials/blob/main/SynologyNAS/ssh_from_os_to_nas_en.md), and [in German here](https://github.com/toafez/Tutorials/blob/main/SynologyNAS/ssh_from_os_to_nas.md) that goes with their [YouTube video in German here](https://youtu.be/VjoWjX_8E3Q).
 
 <br>
 
