@@ -19,11 +19,15 @@ Tommes has an excellent guide [in English here](https://github.com/toafez/Tutori
 
 Content below from Gudbrand Olimb's now deleted https://blog.golimb.com/2020/10/03/synology-ssh-key-authentication/
 
+I've updated the commands for restarting the sshd service for DSM 6 and DSM 7
+
 <p align="left"><img src="/images/icon.jpg" width="467" height="200"></p>
 
 There is a lot of posts throughout the web on configuring SSH key authentication on Synology NAS many with some confusing and unnecessary steps such as:
 - Modifying the RSAAuthentication and PubkeyAuthentication parameters in /etc/ssh/sshd_config
-- Restarting the sshd service multiple times with sudo synoservicectl --reload sshd
+- Restarting the sshd service multiple times with:
+    - DSM 7: `sudo systemctl restart sshd`
+    - DSM 6: `sudo synoservicectl --reload sshd`
 - Changing permissions on various folders with chmod both root folders and user folders
 - Unclear creation of ~/.ssh folder ending up under root
 
@@ -267,6 +271,13 @@ result - /volume1/homes/{admin-user}/.ssh
 ### A few extra handy tips
 
 If you think/feel that the SSH daemon on the Synology NAS is not taking into effect your changes you can try to restart the daemon by running below command (requires admin access)
+
+For DSM 7
+```
+sudo systemctl restart sshd
+```
+
+For DSM 6
 ```
 sudo synoservicectl --reload sshd
 ```
