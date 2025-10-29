@@ -1,7 +1,7 @@
 # Synology SSH key setup
 
 <!-- <a href="https://github.com/007revad/Synology_SSH_key_setup/releases"><img src="https://img.shields.io/github/release/007revad/Synology_SSH_key_setup.svg"></a> -->
-<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2F007revad%2FSynology_SSH_key_setup&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=views&edge_flat=false"/></a>
+![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2F007revad%2FSynology_SSH_key_setup&label=Visitors&icon=github&color=%23198754&message=&style=flat&tz=Australia%2FSydney)
 <!-- [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/007revad) -->
 <!-- [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/007revad) -->
 <!-- [![committers.top badge](https://user-badge.committers.top/australia/007revad.svg)](https://user-badge.committers.top/australia/007revad) -->
@@ -19,11 +19,15 @@ Tommes has an excellent guide [in English here](https://github.com/toafez/Tutori
 
 Content below from Gudbrand Olimb's now deleted https://blog.golimb.com/2020/10/03/synology-ssh-key-authentication/
 
+I've updated the commands for restarting the sshd service for DSM 6 and DSM 7
+
 <p align="left"><img src="/images/icon.jpg" width="467" height="200"></p>
 
 There is a lot of posts throughout the web on configuring SSH key authentication on Synology NAS many with some confusing and unnecessary steps such as:
 - Modifying the RSAAuthentication and PubkeyAuthentication parameters in /etc/ssh/sshd_config
-- Restarting the sshd service multiple times with sudo synoservicectl --reload sshd
+- Restarting the sshd service multiple times with:
+    - DSM 7: `sudo systemctl restart sshd`
+    - DSM 6: `sudo synoservicectl --reload sshd`
 - Changing permissions on various folders with chmod both root folders and user folders
 - Unclear creation of ~/.ssh folder ending up under root
 
@@ -267,6 +271,13 @@ result - /volume1/homes/{admin-user}/.ssh
 ### A few extra handy tips
 
 If you think/feel that the SSH daemon on the Synology NAS is not taking into effect your changes you can try to restart the daemon by running below command (requires admin access)
+
+For DSM 7
+```
+sudo systemctl restart sshd
+```
+
+For DSM 6
 ```
 sudo synoservicectl --reload sshd
 ```
